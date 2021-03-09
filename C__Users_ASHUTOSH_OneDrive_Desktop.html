@@ -1,0 +1,412 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Crime data
+
+# In[1]:
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+
+# In[2]:
+
+
+data = pd.read_csv(r"C:\Users\ASHUTOSH\Downloads\police_department_data.csv")
+
+
+# In[3]:
+
+
+data
+
+
+# In[4]:
+
+
+data.head(2)
+
+
+# In[5]:
+
+
+data.shape
+
+
+# In[6]:
+
+
+data.index
+
+
+# In[7]:
+
+
+data.columns
+
+
+# In[8]:
+
+
+data.dtypes
+
+
+# In[9]:
+
+
+data['category'].unique()
+
+
+# In[10]:
+
+
+data['category'].value_counts()
+
+
+# In[11]:
+
+
+data['resolution'].unique()
+
+
+# In[12]:
+
+
+data['resolution'].value_counts()
+
+
+# In[13]:
+
+
+data['department_district'].unique()
+
+
+# In[14]:
+
+
+data['department_district'].value_counts()
+
+
+# In[15]:
+
+
+data.head(2)
+
+
+# In[16]:
+
+
+data['crime_date'].unique()
+
+
+# In[17]:
+
+
+data['crime_date'].value_counts()
+
+
+# In[18]:
+
+
+plt.style.use('seaborn')
+
+
+# In[19]:
+
+
+gc = data['crime_date'].value_counts()
+gc.plot()
+
+
+# In[21]:
+
+
+data['crime_date']= pd.to_datetime(data.crime_date)
+
+
+# In[22]:
+
+
+data.head(2)
+
+
+# In[23]:
+
+
+data.dtypes
+
+
+# In[38]:
+
+
+data.crime_date.dt.month
+
+
+# In[39]:
+
+
+data['month']= data.crime_date.dt.month
+
+
+# In[41]:
+
+
+data.head(5)
+
+
+# In[43]:
+
+
+data.month.value_counts().sort_index()
+
+
+# In[71]:
+
+
+data.month.value_counts().sort_index().plot(kind='bar')
+
+
+# In[46]:
+
+
+data.category.value_counts().sort_index()
+
+
+# In[51]:
+
+
+data.category.value_counts().sort_index().plot(kind='bar')
+
+
+# In[48]:
+
+
+data.department_district.value_counts().sort_index()
+
+
+# In[80]:
+
+
+data.department_district.value_counts().sort_index().plot(kind='bar')
+
+
+# In[62]:
+
+
+data.tail(4)
+
+
+# In[63]:
+
+
+data.resolution.value_counts().sort_index()
+
+
+# In[76]:
+
+
+data.resolution.value_counts().sort_index().plot(kind='bar')
+
+
+# In[83]:
+
+
+data['date']= data.crime_date.dt.date
+
+
+# In[84]:
+
+
+data.head(5)
+
+
+# In[85]:
+
+
+data.date.value_counts().sort_index()
+
+
+# In[100]:
+
+
+data.date.value_counts().sort_index().plot(figsize=(20,10))
+
+
+# In[101]:
+
+
+data.to_clipboard()
+
+
+# In[102]:
+
+
+data.head(2)
+
+
+# In[146]:
+
+
+data[(data['department_district'].str.contains('SOUTHERN')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[149]:
+
+
+data[(data['department_district'].str.contains('SOUTHERN')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[150]:
+
+
+data[(data['department_district'].str.contains('SOUTHERN')) & (data['resolution'].str.contains('ARREST'))]
+
+
+# In[151]:
+
+
+data[(data['department_district'].str.contains('SOUTHERN')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[152]:
+
+
+data[(data['department_district'].str.contains('MISSION')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[153]:
+
+
+data.head(10)
+
+
+# In[156]:
+
+
+data[(data['department_district'].str.contains('MISSION')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[157]:
+
+
+data[(data['department_district'].str.contains('NORTHERN')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[158]:
+
+
+data[(data['department_district'].str.contains('NORTHERN')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[159]:
+
+
+data.head(6)
+
+
+# In[160]:
+
+
+data[(data['department_district'].str.contains('BAYVIEW')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[161]:
+
+
+data[(data['department_district'].str.contains('BAYVIEW')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[162]:
+
+
+data[(data['department_district'].str.contains('TENDERLOIN')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[163]:
+
+
+data[(data['department_district'].str.contains('TENDERLOIN')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[164]:
+
+
+data.head(12)
+
+
+# In[166]:
+
+
+data[(data['department_district'].str.contains('TARAVAL')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[168]:
+
+
+data[(data['department_district'].str.contains('TARAVAL')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[169]:
+
+
+data[(data['department_district'].str.contains('CENTRAL')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[170]:
+
+
+data[(data['department_district'].str.contains('CENTRAL')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[171]:
+
+
+data[(data['department_district'].str.contains('PARK')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[172]:
+
+
+data[(data['department_district'].str.contains('PARK')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[173]:
+
+
+data[(data['department_district'].str.contains('INGLESIDE')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[174]:
+
+
+data[(data['department_district'].str.contains('INGLESIDE')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[176]:
+
+
+data[(data['department_district'].str.contains('RICHMOND')) & (data['resolution'].str.contains('NONE'))]
+
+
+# In[178]:
+
+
+data[(data['department_district'].str.contains('RICHMOND')) & (data['resolution'].str.contains('UNFOUNDED'))]
+
+
+# In[186]:
+
+
+x = data[(data['department_district'].str.contains('RICHMOND')) & (data['resolution'].str.contains('UNFOUNDED'))]
+y = data.date
+plt.plot('x,y')
+
+
+# In[ ]:
+
+
+
+
